@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 
 int main()
 {
@@ -19,8 +20,9 @@ int main()
 	for (; fahrenheit_end > fahrenheit_start; fahrenheit_start += fahrenheit_step)
 	{
 		double celsius = 5. / 9 * (fahrenheit_start - 32);
-	
-		std::cout << fahrenheit_start<<"    "<<celsius<<"    ";
+
+		std::cout << std::setprecision(6) << std::setw(6) << std::left << std::setfill('0') << std::showpoint;
+		std::cout << fahrenheit_start<<"       "<<celsius<<"    ";
 		if (celsius > 30)
 			std::cout << "HOT!\n";
 		else if (celsius < 15)
