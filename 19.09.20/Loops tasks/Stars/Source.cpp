@@ -60,9 +60,9 @@ int main()
 	int height4;
 	std::cin >> height4;
 
-	for (int i = 0; i < height4/2; i++) 
+	for (int i = 0; i < height4/2; ++i) 
 	{
-		for (int j = 0; j < height4; j++)
+		for (int j = 0; j < height4; ++j)
 			if (j - i == height4 - height4 / 2 - 1||i+j== height4 - height4 / 2 - 1)
 				std::cout << "*";
 			else
@@ -70,9 +70,9 @@ int main()
 		std::cout << '\n';
 	}
 
-	for (int i = height4 / 2; i <height4 ; i++)
+	for (int i = height4 / 2; i <height4 ; ++i)
 	{
-		for (int j = 0; j < height4; j++)
+		for (int j = 0; j < height4; ++j)
 			if (i - j == height4 / 2||i+j==2*(height4-1)-height4/2)
 				std::cout << "*";
 			else

@@ -11,7 +11,7 @@ int main()
 	while (digit > 0)
 	{
 		if (digit % 2 == 1)
-			k++;
+			++k;
 		digit=digit >> 1;
 	}
 
@@ -34,11 +34,11 @@ int main()
 	}
 	
 
-	if (abs(x) != x)    
+	if (x<0)    
 	{
 		x = abs(x);
 
-		for (; x > 0; x--)
+		for (; x > 0; --x)
 			if (digit1 % 2 == 1)
 				digit1 = (digit1 >> 1) | (1 << (length - 1));
 			else
@@ -49,7 +49,7 @@ int main()
 
 	else                      
 	{
-		for (; x > 0; x--) 
+		for (; x > 0; --x) 
 			if (digit1 | (1 << (length - 1)) == digit1)
 				digit1 = ((digit1 << 1) | 1) & ~(1 << length);
 			else
