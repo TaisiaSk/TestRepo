@@ -34,7 +34,7 @@ int main()
 	}
 	
 
-	if (abs(x) != x)     //- сдвиг вправо
+	if (abs(x) != x)    
 	{
 		x = abs(x);
 
@@ -47,7 +47,7 @@ int main()
 		std::cout << "Result: " << digit1 << '\n';
 	}
 
-	else                        //- сдвиг влево
+	else                      
 	{
 		for (; x > 0; x--) 
 			if (digit1 | (1 << (lenth - 1)) == digit1)
