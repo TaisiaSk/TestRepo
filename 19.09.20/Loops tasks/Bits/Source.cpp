@@ -1,0 +1,65 @@
+#include <iostream>
+#include <cmath>
+
+int main()
+{
+	std::cout << "Enter digit: ";//-9
+	int digit;
+	std::cin >> digit;
+
+	int k = 0;
+	while (digit > 0)
+	{
+		if (digit % 2 == 1)
+			k++;
+		digit=digit >> 1;
+	}
+
+	std::cout << "Number of 1: " << k << '\n';
+
+
+	std::cout << "Enter your digit: ";//-10
+	int digit1;
+	std::cin >> digit1;
+	std::cout << "Enter a positive number to shift to the left or a negative number to shift to the right: ";
+	int x;
+	std::cin >> x;
+
+	int lenth=0;
+	int a = digit1;
+	while (a > 0) 
+	{
+		lenth++;
+		a = a >> 1;
+	}
+	
+
+	if (abs(x) != x)     //- сдвиг вправо
+	{
+		x = abs(x);
+
+		for (; x > 0; x--)
+			if (digit1 % 2 == 1)
+				digit1 = (digit1 >> 1) | (1 << (lenth - 1));
+			else
+				digit1 = digit1 >> 1;
+
+		std::cout << "Result: " << digit1 << '\n';
+	}
+
+	else                        //- сдвиг влево
+	{
+		for (; x > 0; x--) 
+			if (digit1 | (1 << (lenth - 1)) == digit1)
+				digit1 = ((digit1 << 1) | 1) & ~(1 << lenth);
+			else
+				digit1 = (digit1 << 1) & ~(1 << lenth);
+
+	std::cout << "Result: " << digit1 << '\n';
+	}
+
+
+
+	system("pause");
+	return(0);
+}
