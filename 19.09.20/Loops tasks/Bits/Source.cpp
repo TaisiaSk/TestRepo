@@ -25,11 +25,11 @@ int main()
 	int x;
 	std::cin >> x;
 
-	int lenth=0;
+	int length=0;
 	int a = digit1;
 	while (a > 0) 
 	{
-		lenth++;
+		length++;
 		a = a >> 1;
 	}
 	
@@ -40,7 +40,7 @@ int main()
 
 		for (; x > 0; x--)
 			if (digit1 % 2 == 1)
-				digit1 = (digit1 >> 1) | (1 << (lenth - 1));
+				digit1 = (digit1 >> 1) | (1 << (length - 1));
 			else
 				digit1 = digit1 >> 1;
 
@@ -50,10 +50,10 @@ int main()
 	else                        //- сдвиг влево
 	{
 		for (; x > 0; x--) 
-			if (digit1 | (1 << (lenth - 1)) == digit1)
-				digit1 = ((digit1 << 1) | 1) & ~(1 << lenth);
+			if (digit1 | (1 << (length - 1)) == digit1)
+				digit1 = ((digit1 << 1) | 1) & ~(1 << length);
 			else
-				digit1 = (digit1 << 1) & ~(1 << lenth);
+				digit1 = (digit1 << 1) & ~(1 << length);
 
 	std::cout << "Result: " << digit1 << '\n';
 	}
