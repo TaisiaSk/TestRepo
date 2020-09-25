@@ -46,9 +46,9 @@ int main()
 	{
 		for (; x > 0; --x)
 			if ((digit1 >>(sizeof(int)*8-1))&1 == 1)
-				digit1 = ((digit1 << 1) | 1) & ~(1 << sizeof(int)*8);
+				digit1 = ((digit1 << 1) | 1);
 			else
-				digit1 = (digit1 << 1) & ~(1 << sizeof(int)*8);
+				digit1 = (digit1 << 1);
 
 		std::cout << "Result: " << digit1 << '\n';
 	}
