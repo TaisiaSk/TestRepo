@@ -25,8 +25,11 @@ int main()
 	{
 		for (int j = height2-i-1; j != 0; --j)
 			std::cout << " ";
+
 		for (int y = 0; y != 2*i+1; ++y)
 			std::cout << "*";
+
+
 		std::cout << '\n';
 	}
 
@@ -40,8 +43,11 @@ int main()
 	{
 		for (int j = height3 / 2 +i+1; j != height3; ++j)
 			std::cout << " ";
+
 		for (int y = 0; y != 2 * i + 1; ++y)
 			std::cout << "*";
+
+
 		std::cout << '\n';
 	}
 
@@ -49,8 +55,11 @@ int main()
 	{
 		for (int j = height3-height3/2; j != i; --j)
 			std::cout << " ";
+
 		for (int y = 2*i-1; y != 0; --y)
 			std::cout << "*";
+
+
 		std::cout << '\n';
 	}
 
@@ -63,20 +72,26 @@ int main()
 	for (int i = 0; i < height4/2; ++i) 
 	{
 		for (int j = 0; j < height4; ++j)
-			if (j - i == height4 - height4 / 2 - 1||i+j== height4 - height4 / 2 - 1)
+		{
+			if (j - i == height4 - height4 / 2 - 1 || i + j == height4 - height4 / 2 - 1)
 				std::cout << "*";
 			else
 				std::cout << " ";
+		}
+
 		std::cout << '\n';
 	}
 
 	for (int i = height4 / 2; i <height4 ; ++i)
 	{
 		for (int j = 0; j < height4; ++j)
-			if (i - j == height4 / 2||i+j==2*(height4-1)-height4/2)
+		{
+			if (i - j == height4 / 2 || i + j == 2 * (height4 - 1) - height4 / 2)
 				std::cout << "*";
 			else
 				std::cout << " ";
+		}
+
 		std::cout << '\n';
 	}
 
@@ -90,11 +105,15 @@ int main()
 	{
 		for (int j = height5 / 2 + i + 1; j != height5; ++j)
 			std::cout << " ";
+
 		for (int y = 0; y != 2 * i + 1; ++y)
+		{
 			if (y % 2 == 0)
 				std::cout << "*";
 			else
 				std::cout << " ";
+		}
+
 		std::cout << '\n';
 	}
 
@@ -102,11 +121,15 @@ int main()
 	{
 		for (int j = height5 - height5 / 2; j != i; --j)
 			std::cout << " ";
+
 		for (int y = 2 * i - 1; y != 0; --y)
+		{
 			if (y % 2 == 1)
 				std::cout << "*";
 			else
 				std::cout << " ";
+		}
+
 		std::cout << '\n';
 	}
 	

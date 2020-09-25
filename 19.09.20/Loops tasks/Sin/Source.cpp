@@ -13,9 +13,10 @@ int main()
 
 	double S;
 	S = sin(x);
-	for (; N > 1; --N)
-		S = sin(N);
-
+	
+	while (N-- > 1)
+		S = sin(S);
+	
 	std::cout << "Result: " << S << '\n';
 
 

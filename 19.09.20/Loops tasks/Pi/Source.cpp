@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 
 int main()
 {
@@ -9,11 +10,15 @@ int main()
 	double a = 1;
 	double pi=0;
 
-	for (int i = 1; a >= x; ++i, a = 1. / (2 * i + 1))
+	for (int i = 1; a >= x; ++i)
+	{
 		if (i % 2 == 1)
 			pi += a;
 		else
 			pi -= a;
+
+		a = 1. / (2 * i + 1);
+	}
 	
 
 	pi = 4 * pi;
@@ -21,7 +26,7 @@ int main()
 	if (pi == 0)
 		std::cout << "Invalid input\n";
 	else
-		std::cout << "Your pi: " << pi << '\n';
+		std::cout << "Your pi: " <<  pi << '\n';
 	
 	system("pause");
 	return(0);
