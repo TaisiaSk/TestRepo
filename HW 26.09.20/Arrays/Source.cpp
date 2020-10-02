@@ -19,8 +19,16 @@ int main()
 
 	std::cout << '\n' << "Reverse array:" << '\n';
 
-	for (int idx = Size - 1; idx >= 0; --idx)
+	char st;
+	for (int idx =0; idx < Size; ++idx)
 	{
+		if (idx < Size / 2)
+		{
+			st = arr[idx];
+			arr[idx] = arr[Size - 1 - idx];
+			arr[Size - 1 - idx] = st;
+		}
+
 		std::cout << arr[idx] << ' ';
 	}
 

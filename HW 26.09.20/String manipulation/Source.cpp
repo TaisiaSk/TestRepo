@@ -1,6 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
-
+#include <string>
 
 int main()
 {
@@ -10,10 +10,11 @@ int main()
 
 	for (int i = 0; i < 20; ++i)
 	{
-		if (str[i] == tolower(str[i]))
-			str[i]=toupper(str[i]);
-		else
-			str[i]=tolower(str[i]);
+		if (str[i] <= 90 && str[i] >= 65)
+			str[i] += 32;
+
+		else if (str[i] <= 122 && str[i] >= 97)
+			str[i] -= 32;
 	}
 
 	std::cout << str << '\n';
@@ -49,28 +50,31 @@ int main()
 
 	int digit = 0;
 
-	for (size_t i = 0; i <= strlen(num); ++i)
+	for (size_t i = 0; i < strlen(num); ++i)
 	{
 		if (num[i] == '1')
 			digit += (1 << (strlen(num)-i-1));
 
 	}
 
-	char result[9] ;
-	for (size_t j = strlen(result);j>=0;--j)
+	for (size_t i = 0; i < strlen(num);++ i)
 	{
 		if (digit > 0)
-		{
-			result[j] = digit % 10 + '0';
-			digit /= 10;
-		}
+			num[i] = digit % 10 + '0';
 		else
-		{
-			result[j] = 0;
-		}
+			num[i] = '\0';
+		digit /= 10;
 	}
 
-	std::cout << "Decimal: " << result << '\n';
+	char st;
+	for (int i = 0; i < strlen(num)/2; ++i)
+	{
+		st = num[i];
+		num[i] = num[strlen(num) - 1-i];
+		num[strlen(num) - 1-i] = st;
+	}
+		
+	std::cout << "Decimal: " << num <<"  "<<strlen(num)<< '\n';
 	
 
 	system("pause");
