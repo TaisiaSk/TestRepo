@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Strings and numbers", "Stri
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Hexadecimal notation", "Hexadecimal notation\Hexadecimal notation.vcxproj", "{FCC1B637-9F1F-4B68-AC98-220401E65715}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "String length", "String length\String length.vcxproj", "{79DA9169-0E17-49AC-B1CA-F0CA9570CC14}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{FCC1B637-9F1F-4B68-AC98-220401E65715}.Release|x64.Build.0 = Release|x64
 		{FCC1B637-9F1F-4B68-AC98-220401E65715}.Release|x86.ActiveCfg = Release|Win32
 		{FCC1B637-9F1F-4B68-AC98-220401E65715}.Release|x86.Build.0 = Release|Win32
+		{79DA9169-0E17-49AC-B1CA-F0CA9570CC14}.Debug|x64.ActiveCfg = Debug|x64
+		{79DA9169-0E17-49AC-B1CA-F0CA9570CC14}.Debug|x64.Build.0 = Debug|x64
+		{79DA9169-0E17-49AC-B1CA-F0CA9570CC14}.Debug|x86.ActiveCfg = Debug|Win32
+		{79DA9169-0E17-49AC-B1CA-F0CA9570CC14}.Debug|x86.Build.0 = Debug|Win32
+		{79DA9169-0E17-49AC-B1CA-F0CA9570CC14}.Release|x64.ActiveCfg = Release|x64
+		{79DA9169-0E17-49AC-B1CA-F0CA9570CC14}.Release|x64.Build.0 = Release|x64
+		{79DA9169-0E17-49AC-B1CA-F0CA9570CC14}.Release|x86.ActiveCfg = Release|Win32
+		{79DA9169-0E17-49AC-B1CA-F0CA9570CC14}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
