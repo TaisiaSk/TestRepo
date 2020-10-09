@@ -25,9 +25,11 @@ int main()
 	char bin[256];
 	std::cin.getline(bin, 256);
 	
-	for (size_t i = 0; i < strlen(bin); ++i)
+	size_t size = strlen(bin);
+
+	for (size_t i = 0; i < size; ++i)
 	{
-		if (i == strlen(bin)-1)
+		if (i == size-1)
 			std::cout << "Binary number!" << '\n';
 
 
@@ -49,15 +51,15 @@ int main()
 	std::cin.getline(num, 9);
 
 	int digit = 0;
-
-	for (size_t i = 0; i < strlen(num); ++i)
+	size_t len = strlen(num);
+	for (size_t i = 0; i < len; ++i)
 	{
 		if (num[i] == '1')
-			digit += (1 << (strlen(num)-i-1));
+			digit += (1 << (len-i-1));
 
 	}
 
-	for (size_t i = 0; i < strlen(num);++ i)
+	for (size_t i = 0; i < len;++ i)
 	{
 		if (digit > 0)
 			num[i] = digit % 10 + '0';
@@ -66,15 +68,17 @@ int main()
 		digit /= 10;
 	}
 
+	len = strlen(num);
+
 	char st;
-	for (int i = 0; i < strlen(num)/2; ++i)
+	for (int i = 0; i < len/2; ++i)
 	{
 		st = num[i];
-		num[i] = num[strlen(num) - 1-i];
-		num[strlen(num) - 1-i] = st;
+		num[i] = num[len - 1-i];
+		num[len - 1-i] = st;
 	}
 		
-	std::cout << "Decimal: " << num <<"  "<<strlen(num)<< '\n';
+	std::cout << "Decimal: " << num << '\n';
 	
 
 	system("pause");

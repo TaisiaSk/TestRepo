@@ -10,12 +10,14 @@ int main()
 	int n;
 	std::cin >> n;
 
+	size_t size = strlen(dec);
+
 	if (n == 10)
 		std::cout << "Result: " << dec << '\n';
 	else
 	{
 		int digit = 0;
-		for (int i = 0; i < strlen(dec); ++i)
+		for (int i = 0; i < size; ++i)
 		{
 			digit = digit*10 + dec[i] - '0';
 		}
@@ -30,13 +32,13 @@ int main()
 			else
 				dec[j] = '\0';
 		}
-
+		size = strlen(dec);
 		char st;
-		for (int i = 0; i < strlen(dec)/2; ++i)
+		for (int i = 0; i < size /2; ++i)
 		{
 			st = dec[i];
-			dec[i] = dec[strlen(dec) - 1 - i];
-			dec[strlen(dec) - 1 - i] = st;
+			dec[i] = dec[size - 1 - i];
+			dec[size - 1 - i] = st;
 		}
 		std::cout << "Result: " << dec << '\n';
 	}

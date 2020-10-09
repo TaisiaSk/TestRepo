@@ -1,34 +1,30 @@
 #include <iostream>
-#include <cmath>
-#include <iomanip>
+//#include <cmath>
+//#include <iomanip>
 
 int main()
 {
-	std::cout << "Enter x: ";
-	int x;
-	std::cin >> x;
+	double x1, x2, dx, eps;
+	std::cout << "Enter x1, x2, dx, eps: ";
+	std::cin >> x1 >> x2 >> dx >> eps;
 
-	std::cout << "Enter step dx: ";
-	int dx;
-	std::cin >> dx;
-
-	std::cout << "Enter eps: ";
-	int eps;
-	std::cin >> eps;
-
-	std::cout << "     f(x): " << "    " << "sin(x): \n";
-	
-	double result = x;
-	int factorial = 1;
-	for (int n = 1;  abs(result) > eps; ++n)
+	double sum = 0;
+	int n = 1;
+	double term;
+	std::cout << "x\tF(x)\tsin(x)\n";
+	while (x1 <= x2)
 	{
-		result = ((-1) ^ (n + 1) * x ^ (2 * n + 1)) /factorial;
-
-		std::cout << "x" << n << "   ";
-		std::cout << std::setw(8) << std::left;
-		std::cout << result << "  " << sin(x) << '\n';
-		x += dx;
-		factorial *= (n*2) * (2*n + 1);
+		term = x1;
+		sum = 0;
+		n = 1;
+		do
+		{
+			sum += term;
+			++n;
+			term = -1 * term * x1*x1 / ((2 * n - 1)*(2*n-2));
+		} while (abs(term) >= eps);
+		std::cout << x1 << ' ' << sum << ' ' << sin(x1) << '\n';
+		x1 += dx;
 	}
 
 

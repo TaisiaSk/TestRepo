@@ -9,8 +9,9 @@ int main()
 	short lenght0 = 0;
 	short lenght1 = 0;
 	short n;
+	size_t size = strlen(str);
 
-	for (int i = 0; i < strlen(str); ++i)
+	for (int i = 0; i < size; ++i)
 	{
 		if (str[i] == '0')
 		 lenght0++;
@@ -29,7 +30,7 @@ int main()
 	if (lenght0 > lenght1)
 	{
 		lenght1 = lenght0;
-		n = strlen(str) - lenght1+1;
+		n = size - lenght1+1;
 
 	}
 	

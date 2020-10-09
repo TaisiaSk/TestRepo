@@ -17,6 +17,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Snake", "Snake\Snake.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Snail", "Snail\Snail.vcxproj", "{1163BF60-32DA-4144-AD02-2C69A1D2AEAF}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Zigzag", "Zigzag\Zigzag.vcxproj", "{7C080E06-BD96-4913-9495-A2D2C5FF5AAC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -81,6 +83,14 @@ Global
 		{1163BF60-32DA-4144-AD02-2C69A1D2AEAF}.Release|x64.Build.0 = Release|x64
 		{1163BF60-32DA-4144-AD02-2C69A1D2AEAF}.Release|x86.ActiveCfg = Release|Win32
 		{1163BF60-32DA-4144-AD02-2C69A1D2AEAF}.Release|x86.Build.0 = Release|Win32
+		{7C080E06-BD96-4913-9495-A2D2C5FF5AAC}.Debug|x64.ActiveCfg = Debug|x64
+		{7C080E06-BD96-4913-9495-A2D2C5FF5AAC}.Debug|x64.Build.0 = Debug|x64
+		{7C080E06-BD96-4913-9495-A2D2C5FF5AAC}.Debug|x86.ActiveCfg = Debug|Win32
+		{7C080E06-BD96-4913-9495-A2D2C5FF5AAC}.Debug|x86.Build.0 = Debug|Win32
+		{7C080E06-BD96-4913-9495-A2D2C5FF5AAC}.Release|x64.ActiveCfg = Release|x64
+		{7C080E06-BD96-4913-9495-A2D2C5FF5AAC}.Release|x64.Build.0 = Release|x64
+		{7C080E06-BD96-4913-9495-A2D2C5FF5AAC}.Release|x86.ActiveCfg = Release|Win32
+		{7C080E06-BD96-4913-9495-A2D2C5FF5AAC}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

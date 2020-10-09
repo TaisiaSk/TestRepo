@@ -5,9 +5,9 @@ int main()
 	std::cout << "Input decimal number: ";// - ex 6
 	char str[10];
 	std::cin >> str;
-
+	size_t size = strlen(str);
 	int digit = 0;
-	for (int i = 0; i < strlen(str); ++i)
+	for (int i = 0; i < size; ++i)
 	{
 		digit = digit * 10 + str[i] - '0';
 	}
@@ -30,13 +30,13 @@ int main()
 		else
 			str[j] = '\0';
 	}
-
+	size = strlen(str);
 	char st;
-	for (int i = 0; i < strlen(str) / 2; ++i)
+	for (int i = 0; i < size / 2; ++i)
 	{
 		st = str[i];
-		str[i] = str[strlen(str) - 1 - i];
-		str[strlen(str) - 1 - i] = st;
+		str[i] = str[size - 1 - i];
+		str[size - 1 - i] = st;
 	}
 	std::cout << "Result: " << str << '\n';
 

@@ -17,6 +17,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Zipper", "Zipper\Zipper.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Numerical series", "Numerical series\Numerical series.vcxproj", "{7E3346A4-1686-45C0-BB12-B2326F36B1F8}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Another", "Another\Another.vcxproj", "{0CD22C21-0C9E-4EA7-A8D6-5F143F6782C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -81,6 +83,14 @@ Global
 		{7E3346A4-1686-45C0-BB12-B2326F36B1F8}.Release|x64.Build.0 = Release|x64
 		{7E3346A4-1686-45C0-BB12-B2326F36B1F8}.Release|x86.ActiveCfg = Release|Win32
 		{7E3346A4-1686-45C0-BB12-B2326F36B1F8}.Release|x86.Build.0 = Release|Win32
+		{0CD22C21-0C9E-4EA7-A8D6-5F143F6782C5}.Debug|x64.ActiveCfg = Debug|x64
+		{0CD22C21-0C9E-4EA7-A8D6-5F143F6782C5}.Debug|x64.Build.0 = Debug|x64
+		{0CD22C21-0C9E-4EA7-A8D6-5F143F6782C5}.Debug|x86.ActiveCfg = Debug|Win32
+		{0CD22C21-0C9E-4EA7-A8D6-5F143F6782C5}.Debug|x86.Build.0 = Debug|Win32
+		{0CD22C21-0C9E-4EA7-A8D6-5F143F6782C5}.Release|x64.ActiveCfg = Release|x64
+		{0CD22C21-0C9E-4EA7-A8D6-5F143F6782C5}.Release|x64.Build.0 = Release|x64
+		{0CD22C21-0C9E-4EA7-A8D6-5F143F6782C5}.Release|x86.ActiveCfg = Release|Win32
+		{0CD22C21-0C9E-4EA7-A8D6-5F143F6782C5}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
