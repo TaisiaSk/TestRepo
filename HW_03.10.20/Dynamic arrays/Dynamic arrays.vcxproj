@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{5887d4b5-1168-4ebe-a764-2bb453521290}</ProjectGuid>
+    <ProjectGuid>{51F1B231-B2EB-4495-9F98-797DB353A081}</ProjectGuid>
     <RootNamespace>Dinamicarrays</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>Dynamic arrays</ProjectName>
