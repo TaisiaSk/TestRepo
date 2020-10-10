@@ -1,7 +1,10 @@
 #include <iostream>
+#include <ctime>
 
 int main()
 {
+	srand(time(NULL));
+
 	int row;
 	std::cout << "Enter the number of rows: ";
 	std::cin >> row;
@@ -24,8 +27,8 @@ int main()
 	for (size_t i = 0; i < row; ++i)
 		for (size_t j = 0; j < col; ++j)
 		{
-			arr1[i][j] = rand() % 200 - 100;
-			arr2[i][j] = rand() % 200 - 100;
+			arr1[i][j] = rand() % 201 - 100;
+			arr2[i][j] = rand() % 201 - 100;
 			arr3[i][j] = arr1[i][j] + arr2[i][j];
 		}
 

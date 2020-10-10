@@ -1,7 +1,10 @@
 #include <iostream>
+#include <ctime>
 
 int main()
 {
+	srand(time(NULL));
+
 	int row;
 	std::cout << "Enter the number of rows: ";
 	std::cin >> row;
@@ -16,7 +19,7 @@ int main()
 
 	for (size_t i = 0; i < row; ++i)
 		for (size_t j = 0; j < col; ++j)
-			arr[i][j] = rand() % 200 - 100;
+			arr[i][j] = rand() % 201 - 100;
 
 	std::cout << "Array: " << '\n';
 	for (size_t i = 0; i < row; ++i)
@@ -30,27 +33,28 @@ int main()
 
 	std::cout << '\n' << "Saddle points: ";
 
-	int point = -101;
-	int column;
+	int point;
+	int column=-1;
 	for (size_t i = 0; i < row; ++i)
 	{
-		for (size_t j = 0; j < col; ++j)
+		point = arr[i][0];
+		for (size_t j = 1; j < col; ++j)
 			if (arr[i][j] > point)
 			{
 				point = arr[i][j];
 				column = j;
 			}
-		for (size_t idx = 0; idx < row; ++idx)
+		if (column > -1)
 		{
-			if (arr[idx][column] < point)
-			{
-				point = -101;
-				break;
-			}
+			for (size_t idx = 0; idx < row; ++idx)
+				if (arr[idx][column] < point)
+				{
+					point = -101;
+					break;
+				}
+			if (point > -101)
+				std::cout << '(' << i << ',' << column << ') ' << arr[i][column] << '  ';
 		}
-		if (point > -101)
-			std::cout << '(' << i << ',' << column << ') ' << arr[i][column] << '  ';
-		point = -101;
 	}
 
 	std::cout << '\n';

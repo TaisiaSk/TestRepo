@@ -1,7 +1,10 @@
 #include <iostream>
+#include <ctime>
 
 int main()
 {
+	srand(time(NULL));
+
 	int size;
 	std::cout << "Enter size: "; 
 	std::cin >> size;
@@ -38,8 +41,10 @@ int main()
 		std::cout << arr3[idx] << ' ';
 	}
 	
+	norm = sqrt(norm);
+
 	std::cout << '\n' << "Scalar product of arrays: " << scalar << '\n';
-	std::cout << "The norm of the array-sum: " << sqrt(norm) << '\n';
+	std::cout << "The norm of the array-sum: " << norm << '\n';
 	
 
 	delete[] arr1;
