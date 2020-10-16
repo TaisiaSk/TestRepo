@@ -17,6 +17,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Shift of the array", "Shift
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Сreating 1-d arrays from 2-d", "Сreating 1-d arrays from 2-d\Сreating 1-d arrays from 2-d.vcxproj", "{F78D8F52-5C91-4206-95A1-2E28233D04F7}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Shifts in a 2-d array", "Shifts in a 2-d array\Shifts in a 2-d array.vcxproj", "{19A75497-B779-4661-B3FC-ED578474F214}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -81,6 +83,14 @@ Global
 		{F78D8F52-5C91-4206-95A1-2E28233D04F7}.Release|x64.Build.0 = Release|x64
 		{F78D8F52-5C91-4206-95A1-2E28233D04F7}.Release|x86.ActiveCfg = Release|Win32
 		{F78D8F52-5C91-4206-95A1-2E28233D04F7}.Release|x86.Build.0 = Release|Win32
+		{19A75497-B779-4661-B3FC-ED578474F214}.Debug|x64.ActiveCfg = Debug|x64
+		{19A75497-B779-4661-B3FC-ED578474F214}.Debug|x64.Build.0 = Debug|x64
+		{19A75497-B779-4661-B3FC-ED578474F214}.Debug|x86.ActiveCfg = Debug|Win32
+		{19A75497-B779-4661-B3FC-ED578474F214}.Debug|x86.Build.0 = Debug|Win32
+		{19A75497-B779-4661-B3FC-ED578474F214}.Release|x64.ActiveCfg = Release|x64
+		{19A75497-B779-4661-B3FC-ED578474F214}.Release|x64.Build.0 = Release|x64
+		{19A75497-B779-4661-B3FC-ED578474F214}.Release|x86.ActiveCfg = Release|Win32
+		{19A75497-B779-4661-B3FC-ED578474F214}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
