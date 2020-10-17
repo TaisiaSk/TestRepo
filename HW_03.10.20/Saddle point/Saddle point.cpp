@@ -45,16 +45,15 @@ int main()
 				column = j;
 			}
 		if (column > -1)
-		{
 			for (size_t idx = 0; idx < row; ++idx)
-				if (arr[idx][column] < point)
+				if (arr[idx][column] >= point)
 				{
-					point = -101;
-					break;
+					if (idx == row - 1)
+						std::cout << '(' << i << ',' << column << ') ' << arr[i][column] << '  ';
+					else
+						continue;
 				}
-			if (point > -101)
-				std::cout << '(' << i << ',' << column << ') ' << arr[i][column] << '  ';
-		}
+		column = -1;
 	}
 
 	std::cout << '\n';

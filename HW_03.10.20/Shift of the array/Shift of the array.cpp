@@ -34,7 +34,7 @@ int main()
 
 	if (M > 0)
 	{
-		for (size_t i = 0; i < M; ++i)
+		for (size_t i = 0; i < M%N; ++i)
 		{
 			for (int j = N - 1; j >= 0; --j)
 			{
@@ -49,7 +49,7 @@ int main()
 	}
 	else
 	{
-		for (size_t i = 0; i < abs(M); ++i)
+		for (size_t i = 0; i < abs(M)%N; ++i)
 		{
 			for (size_t j = 0; j < N; ++j)
 			{
