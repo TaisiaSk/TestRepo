@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Euclidean algorithm", "Eucl
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Length of string", "Length of string\Length of string.vcxproj", "{7F383ED0-8838-4C9D-9FAA-A2638432A477}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Сonverting to number", "Сonverting to number\Сonverting to number.vcxproj", "{A328C24B-00CE-455F-B246-D7EC7B7D2258}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{7F383ED0-8838-4C9D-9FAA-A2638432A477}.Release|x64.Build.0 = Release|x64
 		{7F383ED0-8838-4C9D-9FAA-A2638432A477}.Release|x86.ActiveCfg = Release|Win32
 		{7F383ED0-8838-4C9D-9FAA-A2638432A477}.Release|x86.Build.0 = Release|Win32
+		{A328C24B-00CE-455F-B246-D7EC7B7D2258}.Debug|x64.ActiveCfg = Debug|x64
+		{A328C24B-00CE-455F-B246-D7EC7B7D2258}.Debug|x64.Build.0 = Debug|x64
+		{A328C24B-00CE-455F-B246-D7EC7B7D2258}.Debug|x86.ActiveCfg = Debug|Win32
+		{A328C24B-00CE-455F-B246-D7EC7B7D2258}.Debug|x86.Build.0 = Debug|Win32
+		{A328C24B-00CE-455F-B246-D7EC7B7D2258}.Release|x64.ActiveCfg = Release|x64
+		{A328C24B-00CE-455F-B246-D7EC7B7D2258}.Release|x64.Build.0 = Release|x64
+		{A328C24B-00CE-455F-B246-D7EC7B7D2258}.Release|x86.ActiveCfg = Release|Win32
+		{A328C24B-00CE-455F-B246-D7EC7B7D2258}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
