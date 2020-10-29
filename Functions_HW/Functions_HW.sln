@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Сonverting to number", "С
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Gauss method", "Gauss method\Gauss method.vcxproj", "{08C54156-4290-4412-BEF2-A6C3FE347054}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Bonding", "Bonding\Bonding.vcxproj", "{CDA87B84-A14E-4755-8930-4EBFA501F151}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{08C54156-4290-4412-BEF2-A6C3FE347054}.Release|x64.Build.0 = Release|x64
 		{08C54156-4290-4412-BEF2-A6C3FE347054}.Release|x86.ActiveCfg = Release|Win32
 		{08C54156-4290-4412-BEF2-A6C3FE347054}.Release|x86.Build.0 = Release|Win32
+		{CDA87B84-A14E-4755-8930-4EBFA501F151}.Debug|x64.ActiveCfg = Debug|x64
+		{CDA87B84-A14E-4755-8930-4EBFA501F151}.Debug|x64.Build.0 = Debug|x64
+		{CDA87B84-A14E-4755-8930-4EBFA501F151}.Debug|x86.ActiveCfg = Debug|Win32
+		{CDA87B84-A14E-4755-8930-4EBFA501F151}.Debug|x86.Build.0 = Debug|Win32
+		{CDA87B84-A14E-4755-8930-4EBFA501F151}.Release|x64.ActiveCfg = Release|x64
+		{CDA87B84-A14E-4755-8930-4EBFA501F151}.Release|x64.Build.0 = Release|x64
+		{CDA87B84-A14E-4755-8930-4EBFA501F151}.Release|x86.ActiveCfg = Release|Win32
+		{CDA87B84-A14E-4755-8930-4EBFA501F151}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
