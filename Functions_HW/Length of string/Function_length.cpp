@@ -1,12 +1,12 @@
 #include <iostream>
-#include <string>
 #include "Header.h"
 
-int calculationLengthOfString(std::string str)
+int calculationLengthOfString(char str[])
 {
     int count=0;
-    for (size_t i = 0; i < str.size(); ++i)
+    while (str[count] != '\0') {
         count++;
+    }
        
     return count;
 }

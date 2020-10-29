@@ -18,5 +18,13 @@
     <ClCompile Include="Source_Gauss.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Function_G.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Header_G.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
