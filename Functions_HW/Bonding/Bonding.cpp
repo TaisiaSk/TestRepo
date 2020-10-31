@@ -19,8 +19,7 @@ void bondingStrings(char str1[],char str2[],char* str3,const size_t len){
         str3[len1 + len2] = str2[len2];
         len2++;
     }
-    if(len1+len2<=len)
-        str3[len1 + len2] = '\0';
+    str3[len] = '\0';
 }
 
 int main() {
