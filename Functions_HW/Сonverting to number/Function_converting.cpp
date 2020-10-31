@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Header.h"
 
-int convertingStringToNumber(char str[256])
+int convertingStringToNumber(char str[])
 {
     int len = strlen(str);
     int val = 0;

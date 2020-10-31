@@ -1,3 +1,3 @@
 #pragma once
 
-int convertingStringToNumber(char str[256]);
+int convertingStringToNumber(char str[]);

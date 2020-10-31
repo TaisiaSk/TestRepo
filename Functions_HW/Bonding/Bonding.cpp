@@ -8,22 +8,23 @@ int calculationLengthOfString(char str[]){
     return count;
 }
 
-void bondingStrings(char str1[],char str2[],char* str3){
+void bondingStrings(char str1[],char str2[],char* str3,const size_t len){
     size_t len1 = 0;
-    while (str1[len1] != '\0') {
+    while (str1[len1] != '\0'&&len>len1) {
         str3[len1] = str1[len1];
         len1++;
     }
     size_t len2 = 0;
-    while (str2[len2] != '\0') {
+    while (str2[len2] != '\0'&&len>len2) {
         str3[len1 + len2] = str2[len2];
         len2++;
     }
-    str3[len1 + len2] = '\0';
+    if(len1+len2<=len)
+        str3[len1 + len2] = '\0';
 }
 
 int main() {
-    std::cout << "Enter the first string:";
+    std::cout << "Enter the first string: ";
     char str1[256];
     std::cin.getline(str1, 256);
     std::cout << "Enter the second string: ";
@@ -32,7 +33,7 @@ int main() {
 
     size_t len = calculationLengthOfString(str1) + calculationLengthOfString(str2);
     char* str3=new char[len+1];
-    bondingStrings(str1, str2, str3);
+    bondingStrings(str1, str2, str3,len);
     std::cout << str3 << '\n';
 
     delete[] str3;
