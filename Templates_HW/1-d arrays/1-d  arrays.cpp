@@ -45,6 +45,26 @@ Type* min_and_following(const Type* arr,
         return arr1;
 }
 
+//task 3
+template <typename Type>
+Type frequent(const Type* arr, const size_t Size) {
+    Type freq;
+    size_t count = 1;
+    size_t maxcount = 1;
+    for (size_t i = 0; i < Size - 1; i++) {
+        for (size_t j = 1; j < Size; j++) {
+            if (arr[i] == arr[j])
+                count++;
+        }
+        if (count >= maxcount) {
+            maxcount = count;
+            freq = arr[i];
+        }
+        count = 1;
+    }
+    return freq;
+}
+
 int main() {
     srand(time(NULL));
 
@@ -61,6 +81,8 @@ int main() {
         std::cout << "Minimum " << result[0] << " and following minimum " << result[1] << '\n';
     else
         std::cout << "Minimum " << result[0] << '\n';
+
+    std::cout << "The most frequently encountered array element: " << frequent(arr, Size) << '\n';
     
     system("pause");
     return(0);
