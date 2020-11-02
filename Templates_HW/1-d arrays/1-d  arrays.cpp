@@ -8,8 +8,8 @@ Type* new_array(const size_t Size){
 
 void fill_random_array(int* arr,
                        const size_t Size,
-                       const int Lb=-100,
-                       const int Ub=100)
+                       const int Lb=-10,
+                       const int Ub=10)
 {
     for (size_t idx = 0; idx < Size; ++idx)
         arr[idx] = rand() % (Ub - Lb + 1) + Lb;
@@ -52,7 +52,7 @@ Type frequent(const Type* arr, const size_t Size) {
     size_t count = 1;
     size_t maxcount = 1;
     for (size_t i = 0; i < Size - 1; i++) {
-        for (size_t j = 1; j < Size; j++) {
+        for (size_t j = i+1; j < Size; j++) {
             if (arr[i] == arr[j])
                 count++;
         }
@@ -62,7 +62,30 @@ Type frequent(const Type* arr, const size_t Size) {
         }
         count = 1;
     }
-    return freq;
+    if (maxcount != 1)
+        return freq;
+    else
+        return(0);
+}
+
+//task 4
+template <typename Type>
+Type* array_of_single_elements(const Type* arr, const size_t Size,int* len) {
+    Type* arr_s = new Type[Size];
+    int count = 0;
+    int k = 0;
+    for (size_t i = 0; i < Size; i++) {
+        for (size_t j = 0; j < Size; j++)
+            if (arr[i] == arr[j] && i != j)
+                count++;
+        if (count == 0) {
+            arr_s[k] = arr[i];
+            k++;
+        }
+        count = 0;
+    }
+    *len = k;
+    return arr_s;
 }
 
 int main() {
@@ -82,8 +105,20 @@ int main() {
     else
         std::cout << "Minimum " << result[0] << '\n';
 
-    std::cout << "The most frequently encountered array element: " << frequent(arr, Size) << '\n';
+    if (frequent(arr, Size) != 0)
+        std::cout << "The most frequently encountered array element: " << frequent(arr, Size) << '\n';
+    else
+        std::cout << "All elements occur once." << '\n';
+
+    std::cout << "Array of single elements:\n";
+    int Size_s;
+    int* arr_s = array_of_single_elements(arr, Size,&Size_s);
+    for (size_t i = 0; i < Size_s; i++)
+        std::cout << arr_s[i] << '\t';
+    std::cout << '\n';
     
+    delete[] arr;
+    delete[] arr_s;
     system("pause");
     return(0);
 }
