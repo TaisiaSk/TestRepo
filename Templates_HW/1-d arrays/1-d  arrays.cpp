@@ -108,10 +108,10 @@ void arrays_nonnegative_and_negative(const Type* arr,
 
 //task 7
 template <typename Type>
-Type sum(const Type* arr, size_t i, const size_t Size) {
-    if (i == Size - 1)
-        return arr[i];
-    return arr[i] + sum(arr, i + 1, Size);
+Type sum(const Type* arr, const size_t Size) {
+    if (Size==1)
+        return arr[0];
+    return arr[0] + sum(arr + 1, Size-1);
 }
 
 //task 8
@@ -131,7 +131,7 @@ Type* insert_into_arr(const Type* arr, const size_t Size,Type num,Type idx) {
 
 //task 9
 template <typename Type>
-Type* insert_arr_into_arr(const Type* arr, const Type* arr_in, const size_t Size, const size_t Size_in, Type idx) {
+Type* insert_arr_into_arr(const Type* arr, const Type* arr_in, const size_t Size, const size_t Size_in, size_t idx) {
     Type* result = new Type[Size + Size_in];
     for (int i = 0,k=0; i < Size + Size_in; ++i) 
         if (i == idx) {
@@ -188,7 +188,7 @@ int main() {
         std::cout << arr_neg[idx] << '\t';
     std::cout << '\n';
 
-    std::cout << "Sum of elements: " << sum(arr, 0, Size) << '\n';
+    std::cout << "Sum of elements: " << sum(arr, Size) << '\n';
 
     //for task 8
     std::cout << "Enter a number: ";

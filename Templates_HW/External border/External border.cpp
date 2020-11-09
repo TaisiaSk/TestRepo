@@ -9,25 +9,17 @@ Type* external_border(const int** arr,
 					const size_t Cols) {
 	int size = 0;
 	Type* arr1 = new Type[2 * Rows + 2 * Cols - 4];
-	for (size_t j = 0; j < Cols - 1; ++j){
-		arr1[size] = arr[0][j];
-		size++;
-	}
+	for (size_t j = 0; j < Cols - 1; ++j)
+		arr1[size++] = arr[0][j];
 
-	for (size_t i = 0; i < Rows - 1; ++i){
-		arr1[size] = arr[i][Rows - 1];
-		size++;
-	}
+	for (size_t i = 0; i < Rows - 1; ++i)
+		arr1[size++] = arr[i][Rows - 1];
 
-	for (int j = Cols - 1; j > 0; --j){
-		arr1[size] = arr[Rows - 1][j];
-		size++;
-	}
+	for (int j = Cols - 1; j > 0; --j)
+		arr1[size++] = arr[Rows - 1][j];
 
-	for (int i = Rows - 1; i > 0; --i){
-		arr1[size] = arr[i][0];
-		size++;
-	}
+	for (int i = Rows - 1; i > 0; --i)
+		arr1[size++] = arr[i][0];
 	return arr1;
 }
 
