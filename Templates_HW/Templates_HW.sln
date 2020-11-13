@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "External border", "External
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1-d arrays", "1-d arrays\1-d arrays.vcxproj", "{A3DCF02D-8E62-4F08-A15D-F565DFCC7E15}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Array_idx", "Array_idx\Array_idx.vcxproj", "{304ACF87-2123-49D6-AABD-B79B4403A64A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{A3DCF02D-8E62-4F08-A15D-F565DFCC7E15}.Release|x64.Build.0 = Release|x64
 		{A3DCF02D-8E62-4F08-A15D-F565DFCC7E15}.Release|x86.ActiveCfg = Release|Win32
 		{A3DCF02D-8E62-4F08-A15D-F565DFCC7E15}.Release|x86.Build.0 = Release|Win32
+		{304ACF87-2123-49D6-AABD-B79B4403A64A}.Debug|x64.ActiveCfg = Debug|x64
+		{304ACF87-2123-49D6-AABD-B79B4403A64A}.Debug|x64.Build.0 = Debug|x64
+		{304ACF87-2123-49D6-AABD-B79B4403A64A}.Debug|x86.ActiveCfg = Debug|Win32
+		{304ACF87-2123-49D6-AABD-B79B4403A64A}.Debug|x86.Build.0 = Debug|Win32
+		{304ACF87-2123-49D6-AABD-B79B4403A64A}.Release|x64.ActiveCfg = Release|x64
+		{304ACF87-2123-49D6-AABD-B79B4403A64A}.Release|x64.Build.0 = Release|x64
+		{304ACF87-2123-49D6-AABD-B79B4403A64A}.Release|x86.ActiveCfg = Release|Win32
+		{304ACF87-2123-49D6-AABD-B79B4403A64A}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
