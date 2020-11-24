@@ -107,14 +107,22 @@ void print_rgb_img_info(const char filename[])
     bmp_in.close();
 }
 
-void black_white(RgbImg const& img)
+RgbImg black_white(RgbImg const& img)
 {
+    RgbImg img_dop;
+    img_dop.height = img.height;
+    img_dop.width = img.width;
+    img_dop.pixels = new RGB * [img_dop.height];
+    for (size_t row = 0; row < img_dop.height; ++row)
+        img_dop.pixels[row] = new RGB[img_dop.width];
+
     BYTE sum;
     for (int i = 0; i < img.height; ++i)
         for (int j = 0; j < img.width; ++j) {
             sum = (img.pixels[i][j].Blue + img.pixels[i][j].Green + img.pixels[i][j].Red)/3;
-            img.pixels[i][j] = { sum,sum,sum };
+            img_dop.pixels[i][j] = { sum,sum,sum };
         }
+    return img_dop;
 }
 
 RgbImg blur(RgbImg const& img, const int arg)
@@ -122,26 +130,29 @@ RgbImg blur(RgbImg const& img, const int arg)
     RgbImg img_dop;
     img_dop.height = img.height;
     img_dop.width = img.width;
-    img_dop.pixels = new RGB * [img.height];
+    img_dop.pixels = new RGB* [img_dop.height];
     for (size_t row = 0; row < img_dop.height; ++row)
         img_dop.pixels[row] = new RGB[img_dop.width];
 
-    BYTE sum_r=0;
-    BYTE sum_g = 0;
-    BYTE sum_b=0;
+    int sum_r=0;
+    int sum_g = 0;
+    int sum_b=0;
     int count = 0;
-    for(size_t i=arg;i<img.height;i++)
-        for (size_t j = arg; j < img.width; ++j)
+    for(int i=0;i<img.height;++i)
+        for (int j = 0; j < img.width; ++j)
         {
-            for (size_t k = i - arg; k <= i + arg; k++)
+           
+            for (int k = i - arg; k <= i + arg; ++k)
             {
-                if (k == img.height)
+                if (k >= (int)img.height)
                     break;
-                for (size_t l = j - arg; l <= i + arg; l++)
+                for (int l = j - arg; l <= j + arg; ++l)
                 {
-                    if (l == img.width)
+                    if (l >= (int)img.width)
                         break;
                     if ((k == i) && (l == j))
+                        continue;
+                    if (k < 0 || l < 0)
                         continue;
                     sum_r += img.pixels[k][l].Red;
                     sum_g += img.pixels[k][l].Green;
@@ -149,7 +160,7 @@ RgbImg blur(RgbImg const& img, const int arg)
                     ++count;
                 }
             }
-            img_dop.pixels[i][j] = { (BYTE)(sum_r / count),(BYTE)(sum_g / count),(BYTE)(sum_b / count) };
+            img_dop.pixels[i][j] = { (BYTE)(sum_r / count) , (BYTE)(sum_g / count) , (BYTE)(sum_b / count) };
             sum_r = 0;
             sum_g = 0;
             sum_b = 0;

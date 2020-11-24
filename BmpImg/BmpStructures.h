@@ -52,9 +52,9 @@ struct BMRUN
 
 struct RGB
 {
+    BYTE Red;
+    BYTE Green;
 	BYTE Blue;
-	BYTE Green;
-	BYTE Red;
 };
 
 struct RgbImg
