@@ -28,11 +28,10 @@ int main() {
    const char* const vars[] = { "abc=cde", "user=cap", "live=evil" };
    char value[12];
 
-   if (find_value((const char**)vars, "live", (char*)value, sizeof(vars)/4))
+   if (find_value((const char**)vars, "live", (char*)value, sizeof(vars)/ sizeof(vars[0])))
        std::cout << value << '\n';
    else
        std::cout << "No\n";
-
     system("pause");
     return 0;
 }
