@@ -1,37 +1,60 @@
 #include <iostream>
 #include <ctime>
 
-bool is_leap(int year)
+
+struct Date
 {
-    if (year % 400 == 0)
-        return true;
-    if ((year % 100 != 0) && (year % 4 == 0))
-        return true;
+private:
+    int _day, _month, _year;
 
-    return false;
-}
-
-int num_of_days(int day, int month, int year)
-{
-    int result = 0;
-    int num_leap = 0;
-    for (int i = 0; i < year; ++i)
-        if (is_leap(i))
-            ++num_leap;
-
-    result = year * 365 + num_leap;
-
-    if (month == 1)
-        return result + day;
-    if (month == 2)
-        return result + day + 31;
-    else
+    bool is_leap(int year) const
     {
-        result += 59;
-        if (month < 9)
-        {            
-            for (size_t i = 3; i < month; ++i)
+        if (year % 400 == 0)
+            return true;
+        if ((year % 100 != 0) && (year % 4 == 0))
+            return true;
+
+        return false;
+    }
+
+    int num_of_days(int day, int month, int year) const
+    {
+        int result = 0;
+        int num_leap = 0;
+        for (int i = 0; i < year; ++i)
+            if (is_leap(i))
+                ++num_leap;
+
+        result = year * 365 + num_leap;
+
+        if (month == 1)
+            return result + day;
+        if (month == 2)
+            return result + day + 31;
+        else
+        {
+            result += 59;
+            if (month < 9)
+            {
+                for (size_t i = 3; i < month; ++i)
+                    if (i % 2 == 0)
+                        result += 30;
+                    else
+                        result += 31;
+
+                if (is_leap(month))
+                    return result + day + 1;
+                return result + day;
+            }
+
+            for (size_t i = 3; i < 8; ++i)
                 if (i % 2 == 0)
+                    result += 30;
+                else
+                    result += 31;
+
+            for (size_t i = 8; i < month; ++i)
+                if (i % 2 != 0)
                     result += 30;
                 else
                     result += 31;
@@ -40,34 +63,13 @@ int num_of_days(int day, int month, int year)
                 return result + day + 1;
             return result + day;
         }
-
-        for (size_t i = 3; i < 8; ++i)
-            if (i % 2 == 0)
-                result += 30;
-            else
-                result += 31;
-
-        for (size_t i = 8; i < month; ++i)
-            if (i % 2 != 0)
-                result += 30;
-            else
-                result += 31;
-
-        if (is_leap(month))
-            return result + day + 1;
-        return result + day;
     }
-}
 
-int toInt(char symbol)
-{
-    return (int)(symbol - '0');
-}
+    int toInt(char symbol)
+    {
+        return (int)(symbol - '0');
+    }
 
-struct Date
-{
-private:
-    int _day, _month, _year;
 public:
     //Constructors
     Date()
@@ -99,7 +101,7 @@ public:
     int getMonth() const { return _month; }
     int getYear() const { return _year; }
 
-    void PrintDate()
+    void PrintDate() const
     {
         std::cout << "Date: ";
         if (_day < 10)
@@ -111,7 +113,7 @@ public:
         std::cout<< _month << '.' << _year << '\n';
     }
 
-    int Period(Date& date2)
+    int Period(Date& date2) const
     {
         int d1 = num_of_days(_day, _month, _year);
         int d2 = num_of_days(date2._day, date2._month, date2._year);
