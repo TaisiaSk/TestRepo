@@ -53,8 +53,8 @@ public:
     }
 
     //getters
-    size_t getRows() { return _rows; }
-    size_t getCols() { return _cols; }
+    size_t getRows() const { return _rows; }
+    size_t getCols() const { return _cols; }
 
     //Methods
     double getValue(size_t const Row, size_t const Col)const
