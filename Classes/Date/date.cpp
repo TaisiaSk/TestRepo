@@ -113,13 +113,41 @@ public:
         std::cout<< _month << '.' << _year << '\n';
     }
 
-    int Period(Date& date2) const
+    int Period(Date const& date2) const
     {
         int d1 = num_of_days(_day, _month, _year);
         int d2 = num_of_days(date2._day, date2._month, date2._year);
         return abs(d1 - d2);
     }
+
 };
+
+//operators
+inline std::ostream& operator<<(std::ostream& out, Date const& date)
+{
+    if (date.getDay() < 10)
+        if (date.getMonth() < 10)
+            return out << '0' << date.getDay() << ".0" << date.getMonth() << '.' << date.getYear() << '\n';
+        else
+            return out << '0' << date.getDay() << "." << date.getMonth() << '.' << date.getYear() << '\n';
+    if (date.getMonth() < 10)
+        return out << date.getDay() << ".0" << date.getMonth() << '.' << date.getYear() << '\n';
+    return out << date.getDay() << "." << date.getMonth() << '.' << date.getYear() << '\n';
+}
+
+inline std::istream& operator>>(std::istream& in, Date& date)
+{
+    int day, month, year;
+    in >> day >> month >> year;
+    date = Date(day, month, year);
+    return in;
+}
+
+inline int operator-(Date const& date1, Date const& date2)
+{
+    return date1.Period(date2);
+}
+
 
 int main()
 {
@@ -129,9 +157,11 @@ int main()
     char date[] = "10.01.2002";
     Date myday(date);
     myday.PrintDate();
+    std::cout << myday;
+    std::cin >> myday;
 
-    std::cout << "The number of days between dates: " << today.Period(myday) << '\n';
-
+    std::cout << "The number of days between dates " << today.Period(myday) << '\n';
+    std::cout << "Subtraction operator " << today - myday << '\n';
    
     system("pause");
     return 0;
