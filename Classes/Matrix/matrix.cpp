@@ -32,7 +32,7 @@ public:
             _data[idx] = new double[Cols];
     }
 
-    Matrix(size_t Rows, size_t Cols,double** arr) : Matrix( Rows, Cols) //accepts an array
+    Matrix(size_t Rows, size_t Cols,double** arr) : Matrix(Rows, Cols) //accepts an array
     {
         for (size_t i = 0; i < Rows; ++i)
             for (size_t j = 0; j < Cols; ++j)
@@ -56,7 +56,14 @@ public:
     size_t getRows() const { return _rows; }
     size_t getCols() const { return _cols; }
 
+
     //Methods
+    void changeValue(size_t const Row, size_t const Col, double kVal)
+    {
+        checkIdx(Row, Col);
+        _data[Row][Col] = kVal;
+    }
+
     double getValue(size_t const Row, size_t const Col)const
     {
         checkIdx(Row, Col);
@@ -99,6 +106,84 @@ public:
     }
 };
 
+//operators
+inline std::ostream& operator<<(std::ostream& out, Matrix const& arr)
+{
+    for (size_t i = 0; i < arr.getRows(); ++i)
+    {
+        for (size_t j = 0; j < arr.getCols(); ++j)
+            out << arr.getValue(i,j) << '\t';
+        out << '\n';
+    }
+    return out;
+}
+
+inline std::istream& operator>>(std::istream& in, Matrix& arr) 
+{
+    double x;
+    std::cout << "Input the array elements separated by a space: ";
+    for (size_t i = 0; i < arr.getRows(); ++i)
+        for (size_t j = 0; j < arr.getCols(); ++j)
+        {
+            in >> x;
+            arr.changeValue(i, j, x);
+        }
+    return in;
+}
+
+inline Matrix operator+(Matrix const& a, Matrix const& b)
+{
+    if (a.getRows() != b.getRows() || a.getCols() != b.getCols())
+        throw "Matrices of different sizes\n";
+    size_t rows = a.getRows();
+    size_t cols = a.getCols();
+        
+    Matrix sum(rows, cols);
+    for (size_t i = 0; i < rows; ++i)
+        for (size_t j = 0; j < cols; ++j)
+            sum.changeValue(i, j, a.getValue(i, j) + b.getValue(i, j));
+
+    return sum;
+}
+
+inline Matrix operator-(Matrix const& a, Matrix const& b)
+{
+    if (a.getRows() != b.getRows() || a.getCols() != b.getCols())
+        throw "Matrices of different sizes\n";
+    size_t rows = a.getRows();
+    size_t cols = a.getCols();
+
+    Matrix sub(rows, cols);
+    for (size_t i = 0; i < rows; ++i)
+        for (size_t j = 0; j < cols; ++j)
+            sub.changeValue(i, j, a.getValue(i, j) - b.getValue(i, j));
+
+    return sub;
+}
+
+inline Matrix operator*(Matrix const& a, Matrix const& b)
+{
+    if (a.getCols() != b.getRows())
+        throw "Incorrect size of the matrices\n";
+    size_t rows = a.getRows();
+    size_t cols = b.getCols();
+    size_t k = a.getCols();
+    double element = 0;
+
+    Matrix prod(rows, cols);
+    for (size_t i = 0; i < rows; ++i)
+        for (size_t j = 0; j < cols; ++j)
+        {
+            for (size_t idx = 0; idx < k; ++idx)
+                element += a.getValue(i, idx) * b.getValue(idx, j);
+
+            prod.changeValue(i, j, element);
+            element = 0;
+        }
+
+    return prod;
+}
+
 int main()
 {
     size_t rows, cols;
@@ -110,8 +195,14 @@ int main()
     Matrix example(rows,cols);
     example.FillRandom(-50, 50);
     example.Print();
+    std::cin >> example;
+    std::cout << example;
+    
+    std::cout << example + example; 
+    std::cout << example - example; 
+    std::cout << example * example;
 
-    std::cout << "Number of rows: " << example.getRows() << '\n';
+    /*std::cout << "Number of rows: " << example.getRows() << '\n';
     std::cout << "Number of columns: " << example.getCols() << '\n';
 
     std::cout << "Input row number ";
@@ -122,7 +213,7 @@ int main()
 
     std::cout << "The norm of the matrix: " << example.Norm() << '\n';
 
-    example.transposed().Print();
+    example.transposed().Print();*/
 
     system("pause");
     return 0;

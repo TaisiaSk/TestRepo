@@ -137,9 +137,10 @@ inline std::ostream& operator<<(std::ostream& out, Date const& date)
 
 inline std::istream& operator>>(std::istream& in, Date& date)
 {
-    int day, month, year;
-    in >> day >> month >> year;
-    date = Date(day, month, year);
+    std::cout << "Input the date in the format: \"dd.mm.YYYY\"\n";
+    char stroka[10];
+    in >> stroka;
+    date = Date(stroka);
     return in;
 }
 
