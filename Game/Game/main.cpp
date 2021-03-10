@@ -4,31 +4,37 @@
 
 int main()
 {    
-    Unit** units = new Unit* [10];
-    for (size_t idx = 0; idx < 10; ++idx)
+    srand(time(NULL));
+    size_t kSize;
+    std::cout << "Input the number of fighters ";
+    std::cin >> kSize;
+
+    Unit** units = new Unit* [kSize];
+    for (size_t idx = 0; idx < kSize; ++idx)
     {
         if (rand() % 2)
-            units[idx] = new Alien();
+            units[idx] = new Alien(50,10);
         else
-            units[idx] = new Predator();
+            units[idx] = new Predator(50,10);
     }
        
-    for (size_t idx = 0; idx < 9; ++idx)
+    for (size_t idx = 0; idx < kSize-1; ++idx)
     {
-        int i1 = rand() % 10;
-        int i2 = rand() % 10;
+        int i1 = rand() % kSize;
+        int i2 = rand() % kSize;
 
         while (!units[i1]->alive())
-            i1 = rand() % 10;
+            i1 = rand() % kSize;
         while (!units[i2]->alive())
-            i2 = rand() % 10;
+            i2 = rand() % kSize;
 
+        std::cout << "Fight!\n";
         fight(units[i1], units[i2]);
     }
 
-    for (size_t idx = 0; idx < 10; ++idx)
+    for (size_t idx = 0; idx < kSize; ++idx)
         if (units[idx]->alive())
-            std::cout << "Winner " << idx << '\n';
+            units[idx]->winRoar();
 
     system("pause");
     return 0;

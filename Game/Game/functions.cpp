@@ -14,13 +14,13 @@ void fight(Unit* u1, Unit* u2)
     while (u1->alive() && u2->alive())
     {
         u1->roar();
-        u1->hit(*u2);
+        u1->hit(u2);
         u2->status();
 
         if (u2->alive())
         {
             u2->roar();
-            u2->hit(*u1);
+            u2->hit(u1);
             u1->status();
         }
     }
