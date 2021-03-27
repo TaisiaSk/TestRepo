@@ -2,6 +2,19 @@
 #include "unit.h"
 #include "functions.h"
 
+// class GameManager
+// cell* field[H][W]
+// loop()
+// 
+// class Cell
+// move()->offset
+// наследники
+// стена и агенты
+// 
+// class Render
+// наследники
+// console графика
+
 int main()
 {    
     srand(time(NULL));
