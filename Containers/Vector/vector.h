@@ -13,59 +13,125 @@ private:
     const double kDefMultiplier = 1.5;
 
 public:
+    struct iterator
+    {
+        Type* _ptr;
+        iterator(Type* ptr = nullptr) : _ptr(ptr){}
+
+        Type const& operator*() const
+        {
+            if(!_ptr)
+                throw std::runtime_error("empty iterator");
+            return *_ptr;
+        }
+
+        bool operator==(iterator const& it)
+        {
+            return _ptr == it._ptr;
+        }
+
+        bool operator!=(iterator const& it)
+        {
+            return !(*this == it);
+        }
+
+        iterator& operator++()
+        {
+            if(!_ptr)
+                throw std::runtime_error("empty iterator");
+            ++_ptr;
+            return *this;
+        }
+
+        iterator operator++(int)
+        {
+            if (!_ptr)
+                throw std::runtime_error("empty iterator");
+            Type* tmp = _ptr;
+            ++_ptr;
+            return iterator(tmp);
+        }
+
+        iterator& operator--()
+        {
+            if(!_ptr)
+                throw std::runtime_error("empty iterator");
+            --_ptr;
+            return *this;
+        }
+
+        iterator operator--(int)
+        {
+            if (!_ptr)
+                throw std::runtime_error("empty iterator");
+            Type* tmp = _ptr;
+            --_ptr;
+            return iterator(tmp);
+        }
+    };
+
     ~Vector();
     Vector(Vector const& vec) :Vector(vec._data, vec._size) {}
     Vector& operator=(Vector const& vec);
 
     Vector();
-    Vector(size_t capacity);
+    Vector(size_t capacity = 0);
     Vector(Type* data, size_t size);
 
     Type& operator[](int idx);
     Type const& operator[](int idx)const;
 
     void push_back(Type const& val);
-    void erase(Type* element);
-    void insert(Type const& val, Type* before);
+    void erase(iterator to_die);
+    //void insert(Type const& val, iterator it_after);
 
     void resize(size_t new_size);
     void clear();
-    Type* find(Type const& to_find);
+    iterator find(Type const& to_find)
+    {
+        for (auto it = begin(); it != end(); ++it)
+            if (*it == to_find)
+                return it;
+        return end();
+    }
+
+
+    iterator begin() { return iterator(_data); }
+    iterator end() { return iterator(_data + _size); }
 };
 
 template <class Type>
-Vector<Type>::Vector()
-{
-    _data = nullptr;
-    _size = 0;
-    _capacity = 0;
-}
+Vector<Type>::Vector() :_data(nullptr),
+                        _size(0),
+                        _capacity(kDefCapacity) {}
 
 template <class Type>
-Vector<Type>::Vector(size_t capacity)
+Vector<Type>::Vector(size_t capacity) : _capacity(capacity), _data(nullptr)
 {
-    _capacity = capacity;
-    _data = new Type[_capacity];
+    if (_capacity != 0)
+        //_data = new Type[_capacity];
+        _data = (Type*)::operator new(_capacity * sizeof(Type));
     _size = 0;
 }
 
 template <class Type>
-Vector<Type>::Vector(Type* data, size_t size)
+Vector<Type>::Vector(Type* data, size_t size) : _capacity(kDefCapacity)
 {
-    _capacity = kDefCapacity;
-    while (size > _capacity)
+    if (size > _capacity)
         _capacity *= kDefMultiplier;
 
     _size = size;
-    _data = new Type[_capacity];
-    for (size_t idx = 0; idx < size; ++idx)
-        _data[idx] = data[idx];
+    //_data = new Type[_capacity];
+    _data = (Type*)::operator new(_capacity * sizeof(Type));
+    for (size_t idx = 0; idx < _size; ++idx)
+        new(_data + idx) Type(data[idx]);
+        //_data[idx] = data[idx];
 }
 
 template <class Type>
 Vector<Type>::~Vector()
 {
-    clear();
+    clear();    
 }
 
 
@@ -75,12 +141,12 @@ Vector<Type>& Vector<Type>::operator=(Vector<Type> const& vec)
 {
     if (_capacity < vec._capacity)
     {
-        _data = new Type[vec.capacity];
+        _data = reinterpret_cast<Type*>(::operator new(vec._capacity * sizeof(Type)));
         _capacity = vec._capacity;
     }
 
     for (size_t idx = 0; idx < vec.size; ++idx)
-        _data[idx] = vec._data[idx];
+        new(_data + idx) Type(vec._data[idx]);
 
     _size = vec.size;
     return *this;
@@ -90,7 +156,7 @@ template<class Type>
 Type const& Vector<Type>::operator[](int idx) const
 {
     if (idx < 0 || idx >= _size)
-        throw std::out_of_range;
+        throw std::exception("index out of bounds");
 
     return _data[idx];
 }
@@ -99,7 +165,7 @@ template<class Type>
 Type& Vector<Type>::operator[](int idx)
 {
     if (idx < 0 || idx >= _size)
-        throw std::out_of_range;
+        throw std::exception("index out of bounds");
 
     return _data[idx];
 }
@@ -109,11 +175,13 @@ Type& Vector<Type>::operator[](int idx)
 template <class Type>
 void Vector<Type>::push_back(Type const& val)
 {
-    if (_capacity == 0)
+    if (_capacity <= 1)
     {
-        _capacity = 1;
-        _data = new Type[_capacity];
-        _data[0] = val;
+        _capacity = kDefCapacity;
+        /*_data = new Type[_capacity];
+       _data[0] = val;*/
+        _data = reinterpret_cast<Type*>(::operator new(_capacity * sizeof(Type)));
+        new(_data) Type(val);       
         _size = 1;
         return;
     }
@@ -121,47 +189,56 @@ void Vector<Type>::push_back(Type const& val)
     if (_size == _capacity)
     {
         _capacity *= kDefMultiplier;
-        Type* tmp_data = new Type[_capacity];
+        Type* tmp_data = reinterpret_cast<Type*>(::operator new(_capacity * sizeof(Type)));
         for (size_t idx = 0; idx < _size; ++idx)
-            tmp_data[idx] = _data[idx];
-        delete[] _data;
+            new(tmp_data+idx) Type( _data[idx]);
+        clear();
         _data = tmp_data;
     }
 
-    _data[_size++] = val;
+    new(_data + (_size++)) Type(val);
 }
 
 template <class Type>
-void Vector<Type>::erase(Type* element)
-{
-    if (element >= _size)
-        throw std::out_of_range;
-
-    for (size_t idx = element; idx < _size - 1; ++idx)
-        _data[idx] = _data[idx + 1];
+void Vector<Type>::erase(iterator to_die)
+{   
+    for (auto it = to_die; it != --end(); ++it)
+    {
+        //TODO
+    }
 
     --_size;
+       
+    /*for (size_t idx = erase_idx; idx < _size - 1; ++idx)
+    {
+        _data[idx].~Type();
+        new(_data + idx) Type(_data[idx + 1]);
+    }
+
+    tmp.~Type();
+    --_size;*/
 }
 
-template <class Type>
-void Vector<Type>::insert(Type const& val, Type* before)
+/*template <class Type>
+void Vector<Type>::insert(Type const& val, iterator it_after)
 {
-    if (before >= _size)
+    //TODO!!!
+    if (ptr_after >= _size)
         throw std::out_of_range;
 
     _capacity *= kDefMultiplier;
     Type* tmp_data = new Type[_capacity];
-    for (size_t idx = 0; idx <= before; ++idx)
+    for (size_t idx = 0; idx < ptr_after; ++idx)
         tmp_data[idx] = _data[idx];
 
-    tmp_data[before+1] = val;
-    for (size_t idx = before + 2; idx < _size + 1; ++idx)
+    tmp_data[ptr_after] = val;
+    for (size_t idx = ptr_after + 1; idx < _size + 1; ++idx)
         tmp_data[idx] = _data[idx - 1];
 
     delete[] _data;
     _data = tmp_data;
     ++_size;
-}
+}*/
 
 template<class Type>
 void Vector<Type>::resize(size_t new_size)
@@ -169,10 +246,10 @@ void Vector<Type>::resize(size_t new_size)
     if (new_size > _capacity)
     {
         _capacity *= kDefMultiplier;
-        Type* tmp_data = new Type[_capacity];
+        Type* tmp_data = reinterpret_cast<Type*>(::operator new(_capacity * sizeof(Type)));
         for (size_t idx = 0; idx < _size; ++idx)
-            tmp_data[idx] = _data[idx];
-        delete[] _data;
+            new(tmp_data[idx]) Type(_data[idx]);
+        clear();
         _data = tmp_data;
     }
 
@@ -184,18 +261,12 @@ void Vector<Type>::clear()
 {
     if (_capacity != 0)
     {
-        delete[] _data;
-        _size = 0;
-        _capacity = 0;
+        for (size_t idx = 0; idx < _size; ++idx)
+            _data[idx].~Type();
+
+        ::operator delete[](_data);
+        _size = _capacity = 0;
     }
 }
 
-template<class Type>
-Type* Vector<Type>::find(Type const& to_find)
-{
-    for (size_t idx = 0; idx < _size; ++idx)
-        if (_data[idx] == to_find)
-            return _data[idx];
 
-    return nullptr;
-}
