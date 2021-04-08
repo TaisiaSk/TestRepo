@@ -241,10 +241,13 @@ void Vector<Type>::erase(iterator to_die_it)
 template <class Type>
 void Vector<Type>::insert(Type const& val, iterator it_after)
 {
-    if (it_after >= end())
-        throw std::out_of_range;
+    //TODO: overload >= for iterator
+   /* if (it_after >= end())
+        throw std::out_of_range("out of range");*/
 
-    _capacity *= kDefMultiplier;
+    if (_size == _capacity)
+        _capacity *= kDefMultiplier();
+
     Type* tmp_data = new Type[_capacity];
     iterator tmp_it(tmp_data);
     for (auto it = begin(); it != it_after; ++it)
@@ -254,15 +257,18 @@ void Vector<Type>::insert(Type const& val, iterator it_after)
         //tmp_data[idx] = _data[idx];
 
     *(tmp_it++) = val;
-    for (auto it = ++it_after; it != ++end(); ++it)
-        *(tmp_it++) = *(--it);
+    for (auto it = it_after; it != ++end(); ++it)
+        *(tmp_it++) = *it;
 
     //for (size_t idx = ptr_after + 1; idx < _size + 1; ++idx)
         //tmp_data[idx] = _data[idx - 1];
 
-    ::operator delete[](_data);
+    size_t size = _size + 1;
+    size_t capacity = _capacity;
+    clear();
     _data = tmp_data;
-    ++_size;
+    _size = size;
+    _capacity = capacity;
 }
 
 template<class Type>

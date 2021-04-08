@@ -16,6 +16,8 @@ int main()
 
     vec.erase(++vec.begin());
 
+    vec.insert(4, vec.begin());
+
     for (int example : vec)
         std::cout << example << ' ';
 
