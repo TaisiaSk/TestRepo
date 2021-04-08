@@ -10,15 +10,15 @@ private:
     size_t _size;
     size_t _capacity;
     static const size_t kDefCapacity = 10;
-    const double kDefMultiplier = 1.5;
+    static const double kDefMultiplier() { return  1.5; }
 
 public:
     struct iterator
     {
         Type* _ptr;
         iterator(Type* ptr = nullptr) : _ptr(ptr){}
-
-        Type const& operator*() const
+        
+        Type& operator*() const
         {
             if(!_ptr)
                 throw std::runtime_error("empty iterator");
@@ -75,7 +75,8 @@ public:
     Vector& operator=(Vector const& vec);
 
     Vector();
-    Vector(size_t capacity = 0);
+    Vector(size_t size = 0);
+    Vector(size_t size, Type const& val);
     Vector(Type* data, size_t size);
 
     Type& operator[](int idx);
@@ -83,7 +84,7 @@ public:
 
     void push_back(Type const& val);
     void erase(iterator to_die);
-    //void insert(Type const& val, iterator it_after);
+    void insert(Type const& val, iterator it_after);
 
     void resize(size_t new_size);
     void clear();
@@ -97,7 +98,22 @@ public:
 
 
     iterator begin() { return iterator(_data); }
-    iterator end() { return iterator(_data + _size); }
+    iterator end() { return iterator(_data+_size); }
+
+    void reserve(size_t new_capacity)
+    {
+        if (new_capacity > _capacity)
+        {
+            Type* tmp_data = reinterpret_cast<Type*>(::operator new(new_capacity * sizeof(Type)));
+            for (size_t idx = 0; idx < _size; ++idx)
+                new(tmp_data + idx) Type(_data[idx]);
+            size_t prev_size = _size;
+            clear();
+            _data = tmp_data;
+            _size = prev_size;
+            _capacity = new_capacity;
+        }
+    }
 };
 
 template <class Type>
@@ -106,12 +122,22 @@ Vector<Type>::Vector() :_data(nullptr),
                         _capacity(kDefCapacity) {}
 
 template <class Type>
-Vector<Type>::Vector(size_t capacity) : _capacity(capacity), _data(nullptr)
+Vector<Type>::Vector(size_t size) : _size(size), _capacity(size)
+{
+    _data = reinterpret_cast<Type*>(::operator new(_capacity * sizeof(Type)));
+    for (size_t idx = 0; idx < _size; ++idx)
+        new(_data + idx) Type;
+}
+
+template<class Type>
+Vector<Type>::Vector(size_t size, Type const& val) : _size(size), _capacity(size), _data(nullptr)
 {
     if (_capacity != 0)
-        //_data = new Type[_capacity];
-        _data = (Type*)::operator new(_capacity * sizeof(Type));
-    _size = 0;
+    {
+        _data = reinterpret_cast<Type*>(::operator new(_capacity * sizeof(Type)));
+        for (size_t idx = 0; idx < _size; ++idx)
+            new(_data + idx) Type(val);
+    }
 }
 
 template <class Type>
@@ -188,7 +214,7 @@ void Vector<Type>::push_back(Type const& val)
 
     if (_size == _capacity)
     {
-        _capacity *= kDefMultiplier;
+        _capacity *= kDefMultiplier();
         Type* tmp_data = reinterpret_cast<Type*>(::operator new(_capacity * sizeof(Type)));
         for (size_t idx = 0; idx < _size; ++idx)
             new(tmp_data+idx) Type( _data[idx]);
@@ -200,14 +226,28 @@ void Vector<Type>::push_back(Type const& val)
 }
 
 template <class Type>
-void Vector<Type>::erase(iterator to_die)
-{   
-    for (auto it = to_die; it != --end(); ++it)
-    {
-        //TODO
-    }
+void Vector<Type>::erase(iterator to_die_it)
+{  
+    if (to_die_it == nullptr)
+        throw std::runtime_error("empty ptr");
 
+    iterator last = --end();
+    while (to_die_it != last)
+    {
+        (*to_die_it._ptr).~Type();
+        new(to_die_it._ptr) Type(*(to_die_it._ptr+1));
+        ++to_die_it;
+    }
+    (*last._ptr).~Type();
     --_size;
+
+    /*for (auto it = to_die; it != last; ++it)
+    {
+        it.~Type();
+        new(it) Type(*(++it));
+    }
+    last.~Type();
+    --_size;*/
        
     /*for (size_t idx = erase_idx; idx < _size - 1; ++idx)
     {
@@ -215,30 +255,37 @@ void Vector<Type>::erase(iterator to_die)
         new(_data + idx) Type(_data[idx + 1]);
     }
 
-    tmp.~Type();
+    _data[size-1].~Type();
     --_size;*/
 }
 
-/*template <class Type>
+//TODO !!!
+template <class Type>
 void Vector<Type>::insert(Type const& val, iterator it_after)
 {
-    //TODO!!!
-    if (ptr_after >= _size)
+    if (it_after >= end())
         throw std::out_of_range;
 
     _capacity *= kDefMultiplier;
     Type* tmp_data = new Type[_capacity];
-    for (size_t idx = 0; idx < ptr_after; ++idx)
-        tmp_data[idx] = _data[idx];
+    iterator tmp_it(tmp_data);
+    for (auto it = begin(); it != it_after; ++it)
+        *(tmp_it++) = *it;
 
-    tmp_data[ptr_after] = val;
-    for (size_t idx = ptr_after + 1; idx < _size + 1; ++idx)
-        tmp_data[idx] = _data[idx - 1];
+    //for (size_t idx = 0; idx < ptr_after; ++idx)
+        //tmp_data[idx] = _data[idx];
 
-    delete[] _data;
+    *(tmp_it++) = val;
+    for (auto it = ++it_after; it != ++end(); ++it)
+        *(tmp_it++) = *(--it);
+
+    //for (size_t idx = ptr_after + 1; idx < _size + 1; ++idx)
+        //tmp_data[idx] = _data[idx - 1];
+
+    ::operator delete[](_data);
     _data = tmp_data;
     ++_size;
-}*/
+}
 
 template<class Type>
 void Vector<Type>::resize(size_t new_size)
