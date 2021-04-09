@@ -3,7 +3,7 @@
 
 int main()
 {
-    Vector<int> vec(3);
+    Vector<int> vec;
     vec.push_back(1);
     vec.push_back(2);
     vec.push_back(3);
@@ -15,6 +15,8 @@ int main()
     std::cout << '\n';
 
     vec.erase(++vec.begin());
+
+    vec.insert(4, vec.begin());
 
     for (int example : vec)
         std::cout << example << ' ';
