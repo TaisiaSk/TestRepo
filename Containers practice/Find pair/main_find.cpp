@@ -12,13 +12,17 @@ std::pair<int, size_t> function(int const* arr, size_t Size, int target)
     for (auto it = mate.rbegin(); it != mate.rend(); ++it)
         if (it->first < target)
         {
-            for (auto it2 = it; it2 != mate.rend(); ++it2)
+            for (auto it2 = mate.begin(); it2 != mate.end(); ++it2)
+            {
                 if ((it->first + it2->first) == target)
                 {
                     result.first = it2->second;
                     result.second = it->second;
                     return result;
                 }
+                if ((it->first + it2->first) > target)
+                    break;
+            }
         }   
 }
 
